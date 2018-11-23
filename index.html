@@ -37,11 +37,11 @@
                 Start/Stop Capture
             </button>
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#listRecords"
-                aria-expanded="false" aria-controls="listRecords">
+                aria-expanded="false" aria-controls="listRecords" onclick="orderToCreateTable()">
                 View/Edit Records
             </button>
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#graph" aria-expanded="false"
-                aria-controls="graph">
+                aria-controls="graph"  onclick="orderToCreateChart()">
                 View Real Time Graph
             </button>
         </p>
@@ -78,34 +78,7 @@
                             <th scope="col">Edit</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>
-                                <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#editRecord">Edit</button>
-                                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#removeRecord">Remove</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>
-                                <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#editRecord">Edit</button>
-                                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#removeRecord">Remove</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>
-                                <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#editRecord">Edit</button>
-                                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#removeRecord">Remove</button>
-                            </td>
-                        </tr>
+                    <tbody id="records">
                     </tbody>
                 </table>
             </div>
