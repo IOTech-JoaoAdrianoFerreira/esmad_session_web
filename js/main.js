@@ -40,6 +40,21 @@ function updateRecord(url, value, callback) {
     xhr.send(json);
 }
 
+function startStopCapture(url, value, callback) {
+    var data = {};
+    data.action = value;
+    var json = JSON.stringify(data);
+    var xhr = new XMLHttpRequest();
+    xhr.callback = callback;
+    xhr.arguments = Array.prototype.slice.call(arguments, 2);
+    xhr.onload = xhrSuccess;
+    xhr.onerror = xhrError;
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    xhr.send(json);
+}
+
+
 function createChart() {
     let json = JSON.parse(this.responseText);
     let labels = [];
@@ -54,14 +69,23 @@ function createChart() {
         options: {
             scales: {
                 xAxes: [{
-                    display: false
+                    display: false,
+                }],
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        beginAtZero: true,
+                        steps: 50,
+                        stepValue: 2,
+                        max: 1.2,
+                    }
                 }]
             }
         },
         data: {
             labels: labels,
             datasets: [{
-                label: 'Decibel (dB)',
+                label: 'Detected',
                 data: data,
                 backgroundColor: "rgba(153,255,51,0.6)"
             }]
@@ -93,6 +117,18 @@ function orderToCreateChart() {
     getRecords("http://localhost:3000/records", createChart);
 }
 
+function orderToStartCapture() {
+    startStopCapture("http://localhost:3000/configurations/", 1, altertStart)
+    document.getElementById("startButton").style.display = "none";
+    document.getElementById("stopButton").style.display = "inline";
+}
+
+function orderToStopCapture() {
+    startStopCapture("http://localhost:3000/configurations/", 0, altertStop)
+    document.getElementById("startButton").style.display = "inline";
+    document.getElementById("stopButton").style.display = "none";
+}
+
 function orderToDeleteRecord(id) {
     document.getElementById("idToRemove").innerHTML = id;
     $('#removeRecord').modal()
@@ -114,6 +150,14 @@ function alertUpdate() {
     location.reload();
 }
 
+function altertStart() {
+    alert(JSON.parse(this.responseText).message);
+}
+
+function altertStop() {
+    alert(JSON.parse(this.responseText).message);
+}
+
 function saveRecord() {
     value = document.getElementById("newRecordValue").value;
     id = document.getElementById("idToUpdate").innerHTML;
@@ -124,4 +168,3 @@ function dropRecord() {
     id = document.getElementById("idToRemove").innerHTML;
     deleteRecord("http://localhost:3000/records/" + id, alertDelete);
 }
-

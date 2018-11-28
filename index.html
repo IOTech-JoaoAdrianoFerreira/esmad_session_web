@@ -27,15 +27,13 @@
 </head>
 
 <body>
-    <h1 class="title">IoT Sound Record</h1>
+    <h1 class="title">IoT Sound Detection</h1>
     <img src="assets/imgs/banner.jpg" class="img-fluid rounded mx-auto d-block" alt="Banner">
 
     <div class="content">
         <p>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#startAndStopCapture"
-                aria-expanded="false" aria-controls="startAndStopCapture">
-                Start/Stop Capture
-            </button>
+            <button type="button" id="startButton" class="btn btn-primary" onclick="orderToStartCapture()">Start Capture</button>
+            <button type="button" id="stopButton" class="btn btn-danger" onclick="orderToStopCapture()">Stop Capture</button>
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#listRecords"
                 aria-expanded="false" aria-controls="listRecords" onclick="orderToCreateTable()">
                 View/Edit Records
@@ -45,28 +43,6 @@
                 View Graph
             </button>
         </p>
-        <div class="collapse" id="startAndStopCapture">
-            <div class="card card-body">
-                <form
-                    <div class="row">
-                        <div class="col-sm">
-                            <label for="ip">IP Adress</label>
-                            <input type="text" class="form-control" id="ip" aria-describedby="IP Adress" placeholder="Enter IP Adress">
-                        </div>
-                        <div class="col-sm">
-                            <label for="port">Port</label>
-                            <input type="text" class="form-control" id="port" placeholder="Port">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm"><br>
-                            <button type="submit" class="btn btn-primary">Start Capture</button>
-                            <button type="button" class="btn btn-danger">Stop Capture</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
         <div class="collapse" id="listRecords">
             <div class="card card-body">
                 <table class="table">
